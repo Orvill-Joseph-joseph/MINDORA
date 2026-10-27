@@ -1,0 +1,4063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090b18">
+<title>MINDORA AI — Learn Beyond Limits</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #090b18;
+  --panel: #111426;
+  --panel2: #161a30;
+  --border: rgba(167,139,250,.18);
+  --purple: #a78bfa;
+  --cyan: #40d9ee;
+  --text: #f1efff;
+  --muted: #999bb7;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.glow {
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: .13;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.glow-one {
+  background: #8057ff;
+  top: -150px;
+  left: -100px;
+}
+
+.glow-two {
+  background: #00cce5;
+  bottom: -180px;
+  right: -100px;
+}
+
+h1, h2, h3, .brand {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+h1 {
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.15;
+  letter-spacing: -1.5px;
+}
+
+h1 span, h2 span {
+  color: var(--purple);
+}
+
+p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+button {
+  transition: .2s ease;
+}
+
+/* BRAND */
+
+.brand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-size: 18px;
+}
+
+.brand small {
+  display: block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.brand-ai {
+  color: var(--purple);
+}
+
+.brand-mark {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  background: rgba(167,139,250,.09);
+}
+
+.brand-mark span {
+  width: 4px;
+  border-radius: 5px;
+  background: var(--purple);
+  animation: equalize 1s ease-in-out infinite alternate;
+}
+
+.brand-mark span:nth-child(1) {
+  height: 12px;
+}
+
+.brand-mark span:nth-child(2) {
+  height: 20px;
+  animation-delay: .3s;
+}
+
+.brand-mark span:nth-child(3) {
+  height: 15px;
+  animation-delay: .6s;
+}
+
+@keyframes equalize {
+  to { transform: scaleY(.45); }
+}
+
+/* BUTTONS */
+
+.primary-button {
+  background: linear-gradient(110deg, #8d70f7, #6e57dd);
+  color: white;
+  border: 1px solid rgba(255,255,255,.12);
+  padding: 13px 18px;
+  border-radius: 12px;
+  font-weight: 700;
+  box-shadow: 0 5px 25px rgba(123,92,255,.15);
+}
+
+.primary-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(123,92,255,.28);
+}
+
+.secondary-button {
+  border: 1px solid var(--border);
+  background: rgba(167,139,250,.06);
+  color: var(--text);
+  padding: 11px 15px;
+  border-radius: 10px;
+}
+
+.secondary-button:hover {
+  border-color: var(--purple);
+  background: rgba(167,139,250,.12);
+}
+
+.field-label {
+  display: block;
+  margin: 20px 0 8px;
+  color: #b3b2d1;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+}
+
+.text-field {
+  width: 100%;
+  background: #0c0f20;
+  border: 1px solid rgba(167,139,250,.19);
+  color: var(--text);
+  padding: 13px 14px;
+  border-radius: 10px;
+  outline: none;
+}
+
+.text-field:focus {
+  border-color: var(--purple);
+  box-shadow: 0 0 0 3px rgba(167,139,250,.08);
+}
+
+.text-field option {
+  background: #111426;
+  color: white;
+}
+
+.eyebrow {
+  font-size: 10px;
+  color: var(--cyan);
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  margin-bottom: 17px;
+}
+
+.eyebrow span {
+  color: var(--purple);
+  margin-right: 5px;
+}
+
+/* ONBOARDING */
+
+.onboarding-screen {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(300px, 520px) minmax(280px, 1fr);
+  gap: 50px;
+  align-items: center;
+  justify-content: center;
+  padding: 45px 7%;
+  animation: appear .6s ease;
+}
+
+.onboarding-card {
+  max-width: 520px;
+  width: 100%;
+  margin: auto;
+  padding: 34px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: rgba(17,20,38,.92);
+  box-shadow: 0 25px 90px rgba(0,0,0,.3);
+}
+
+.onboarding-card h1 {
+  margin-top: 28px;
+  font-size: 35px;
+}
+
+.onboarding-copy {
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+.onboarding-progress {
+  display: flex;
+  gap: 6px;
+  margin-top: 26px;
+}
+
+.onboarding-progress i {
+  width: 28px;
+  height: 4px;
+  border-radius: 5px;
+  background: #292d48;
+}
+
+.onboarding-progress .step-active {
+  background: var(--purple);
+}
+
+.onboarding-submit {
+  width: 100%;
+  margin-top: 25px;
+}
+
+.onboarding-note {
+  text-align: center;
+  font-size: 10px;
+  margin-top: 17px;
+}
+
+.onboarding-login-link {
+  margin-top: 20px;
+  width: 100%;
+  background: none;
+  border: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.onboarding-login-link b {
+  color: var(--purple);
+}
+
+.optional-label {
+  color: #727590;
+  font-size: 9px;
+  margin-left: 5px;
+}
+
+#departmentWrap {
+  padding: 0 12px 12px;
+  margin-top: 15px;
+  border: 1px solid rgba(167,139,250,.18);
+  border-radius: 12px;
+  background: rgba(167,139,250,.035);
+  animation: appear .25s ease;
+}
+
+#departmentWrap .field-label {
+  margin-top: 18px;
+}
+
+.onboarding-side {
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+}
+
+.onboarding-side-copy {
+  margin-top: 15px;
+}
+
+.tiny-label {
+  font-size: 9px;
+  color: var(--cyan);
+  letter-spacing: 1.7px;
+  font-weight: 700;
+}
+
+.onboarding-side-copy h2 {
+  font-size: 35px;
+  margin: 13px 0;
+  line-height: 1.25;
+}
+
+.onboarding-side-copy p {
+  font-size: 13px;
+}
+
+.side-points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.side-points span {
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 10px;
+  color: #c5b9f7;
+  background: rgba(167,139,250,.05);
+}
+
+/* ANIMATED AI ROBOT */
+
+.ultron-stage {
+  height: 300px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.robot-halo {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border: 1px solid rgba(167,139,250,.15);
+  border-radius: 50%;
+  animation: rotate 12s linear infinite;
+}
+
+.halo-two {
+  width: 255px;
+  height: 255px;
+  border-style: dashed;
+  animation-direction: reverse;
+  animation-duration: 22s;
+}
+
+.robot-ring {
+  position: absolute;
+  width: 175px;
+  height: 175px;
+  border: 1px solid rgba(64,217,238,.2);
+  border-radius: 50%;
+  transform: rotateX(68deg);
+}
+
+.ring-two {
+  transform: rotateY(68deg);
+}
+
+.robot-head {
+  position: relative;
+  width: 110px;
+  height: 125px;
+  border: 1px solid #7567b5;
+  border-radius: 42px 42px 30px 30px;
+  background: linear-gradient(145deg, #353657, #14172a 65%);
+  box-shadow: 0 0 45px rgba(130,104,255,.23);
+  animation: float 4s ease-in-out infinite;
+}
+
+.robot-crest {
+  position: absolute;
+  left: 40px;
+  top: -13px;
+  width: 30px;
+  height: 15px;
+  border-radius: 10px 10px 0 0;
+  background: #8c7aff;
+  box-shadow: 0 0 20px #8c7aff;
+}
+
+.robot-eye {
+  position: absolute;
+  top: 48px;
+  width: 19px;
+  height: 7px;
+  border-radius: 8px;
+  background: var(--cyan);
+  box-shadow: 0 0 15px var(--cyan);
+  animation: blink 4s infinite;
+}
+
+.eye-left { left: 20px; }
+.eye-right { right: 20px; }
+
+.robot-nose {
+  position: absolute;
+  left: 52px;
+  top: 58px;
+  width: 6px;
+  height: 15px;
+  background: #77719c;
+  border-radius: 4px;
+}
+
+.robot-mouth {
+  position: absolute;
+  left: 33px;
+  bottom: 25px;
+  width: 44px;
+  height: 3px;
+  background: var(--purple);
+  box-shadow: 0 0 10px var(--purple);
+}
+
+.robot-jaw {
+  position: absolute;
+  bottom: -12px;
+  left: 22px;
+  width: 65px;
+  height: 20px;
+  background: #252743;
+  border: 1px solid #7567b5;
+  border-radius: 0 0 20px 20px;
+}
+
+.robot-caption {
+  position: absolute;
+  bottom: 8px;
+  font-size: 9px;
+  letter-spacing: 1.7px;
+  color: #a5a2c4;
+}
+
+.robot-caption i,
+.status-pill i,
+.chat-status i {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: #4be2b3;
+  border-radius: 50%;
+  box-shadow: 0 0 9px #4be2b3;
+  margin-right: 7px;
+}
+
+/* MAIN APP */
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+}
+
+.sidebar {
+  width: 255px;
+  min-width: 255px;
+  background: #0c0e1c;
+  border-right: 1px solid rgba(167,139,250,.13);
+  padding: 26px 17px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  transition: transform .3s ease;
+}
+
+.workspace-label {
+  color: #666985;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  margin: 38px 10px 15px;
+}
+
+.nav-list {
+  display: grid;
+  gap: 7px;
+}
+
+.nav-item {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #a8a9c3;
+  text-align: left;
+  padding: 12px 13px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.nav-item:hover,
+.nav-item.active {
+  color: white;
+  background: rgba(167,139,250,.1);
+  border-color: rgba(167,139,250,.15);
+}
+
+.nav-item.active {
+  box-shadow: inset 3px 0 var(--purple);
+}
+
+.nav-icon {
+  display: inline-block;
+  width: 25px;
+  color: var(--purple);
+  font-size: 17px;
+}
+
+.nav-badge {
+  font-size: 8px;
+  background: rgba(64,217,238,.13);
+  color: var(--cyan);
+  padding: 3px 5px;
+  border-radius: 5px;
+  float: right;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+  padding-top: 30px;
+}
+
+.streak-card {
+  padding: 15px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: linear-gradient(145deg, rgba(167,139,250,.09), rgba(64,217,238,.025));
+}
+
+.streak-top {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.streak-icon {
+  color: var(--purple);
+}
+
+.streak-number {
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.streak-copy {
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 6px;
+}
+
+.streak-days {
+  display: flex;
+  gap: 5px;
+  margin-top: 14px;
+}
+
+.streak-days i {
+  flex: 1;
+  text-align: center;
+  padding: 6px 0;
+  background: #20233a;
+  border-radius: 5px;
+  font-size: 9px;
+  font-style: normal;
+}
+
+.streak-days .done {
+  background: rgba(167,139,250,.2);
+  color: #d5caff;
+}
+
+.streak-days .today {
+  background: var(--purple);
+  color: #0c0e1c;
+}
+
+.profile-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 4px 4px;
+  margin-top: 14px;
+  background: transparent;
+  border: 0;
+  color: var(--text);
+  text-align: left;
+}
+
+.avatar, .top-avatar {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  background: linear-gradient(145deg, #8d70f7, #423a83);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.profile-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-text b, .profile-text small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile-text b {
+  font-size: 11px;
+}
+
+.profile-text small {
+  color: var(--muted);
+  font-size: 9px;
+  margin-top: 3px;
+}
+
+.dots {
+  color: var(--muted);
+}
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 13px;
+  padding: 12px;
+  border: 1px solid rgba(255,125,145,.2);
+  border-radius: 10px;
+  background: rgba(255,125,145,.045);
+  color: #ffb3c0;
+  font-size: 12px;
+  text-align: left;
+}
+
+.logout-button:hover {
+  background: rgba(255,125,145,.12);
+  border-color: rgba(255,125,145,.5);
+}
+
+/* MAIN CONTENT */
+
+.main-area {
+  flex: 1;
+  min-width: 0;
+  padding: 0 32px 35px;
+}
+
+.topbar {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  border-bottom: 1px solid rgba(167,139,250,.1);
+}
+
+.breadcrumb {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.breadcrumb span {
+  margin: 0 10px;
+  color: #555975;
+}
+
+.breadcrumb b {
+  color: var(--text);
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.status-pill {
+  padding: 8px 10px;
+  border: 1px solid rgba(75,226,179,.17);
+  border-radius: 30px;
+  color: #a6f3d8;
+  font-size: 9px;
+  letter-spacing: .7px;
+}
+
+.status-pill i {
+  width: 5px;
+  height: 5px;
+}
+
+.top-avatar {
+  width: 31px;
+  height: 31px;
+}
+
+.mobile-menu {
+  display: none;
+  color: white;
+  background: transparent;
+  border: 0;
+  font-size: 22px;
+}
+
+.page {
+  display: none;
+  padding-top: 32px;
+  animation: appear .35s ease;
+}
+
+.page.active-page {
+  display: block;
+}
+
+.welcome-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin: 8px 0 28px;
+}
+
+.welcome-row .subheading {
+  margin-top: 12px;
+  font-size: 13px;
+}
+
+.hero-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 280px;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 35px;
+  background: linear-gradient(110deg, #191833, #13172c 60%, #101c30);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 440px;
+}
+
+.hero-kicker {
+  color: var(--cyan);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  margin-bottom: 20px;
+}
+
+.live-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 10px var(--cyan);
+  margin-right: 8px;
+}
+
+.hero-card h2 {
+  font-size: 35px;
+  line-height: 1.2;
+}
+
+.hero-card p {
+  max-width: 330px;
+  font-size: 12px;
+  margin-top: 12px;
+}
+
+.glass-button {
+  margin-top: 23px;
+  border: 1px solid rgba(167,139,250,.35);
+  background: rgba(167,139,250,.1);
+  color: white;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 11px;
+}
+
+.hero-visual {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  right: 7%;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  display: grid;
+  place-items: center;
+}
+
+.orbit {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border: 1px solid rgba(167,139,250,.28);
+  border-radius: 50%;
+  animation: rotate 15s linear infinite;
+}
+
+.orbit-b {
+  width: 175px;
+  height: 250px;
+  transform: rotate(60deg);
+  border-color: rgba(64,217,238,.2);
+  animation-duration: 18s;
+  animation-direction: reverse;
+}
+
+.orbit-c {
+  width: 250px;
+  height: 130px;
+  transform: rotate(-35deg);
+  animation-duration: 21s;
+}
+
+.planet {
+  display: grid;
+  place-items: center;
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 25%, #c8b7ff, #6c54d8 45%, #26244e);
+  box-shadow: 0 0 50px rgba(141,112,247,.4);
+  font-size: 27px;
+  animation: float 4s ease-in-out infinite;
+}
+
+.planet-dot {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 15px var(--cyan);
+}
+
+.dot-a { top: 25px; left: 80px; }
+.dot-b { bottom: 40px; right: 45px; }
+.dot-c { top: 50%; right: 8px; }
+
+.hero-foot {
+  position: absolute;
+  bottom: 17px;
+  left: 30px;
+  right: 30px;
+  display: flex;
+  justify-content: space-between;
+  color: #9d9cbb;
+  font-size: 9px;
+}
+
+/* DASHBOARD CARDS */
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin: 35px 0 20px;
+}
+
+.section-heading h2 {
+  font-size: 19px;
+}
+
+.section-heading p {
+  margin-top: 5px;
+  font-size: 11px;
+}
+
+.text-button {
+  color: var(--purple);
+  border: 0;
+  background: transparent;
+  font-size: 11px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.stat-card, .panel, .lesson-card {
+  background: rgba(17,20,38,.88);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.stat-card {
+  padding: 18px;
+}
+
+.stat-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #a5a5c2;
+  font-size: 9px;
+  letter-spacing: .7px;
+}
+
+.stat-icon {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  font-size: 15px;
+}
+
+.purple { color: var(--purple); background: rgba(167,139,250,.1); }
+.cyan { color: var(--cyan); background: rgba(64,217,238,.1); }
+.pink { color: #ff90c8; background: rgba(255,144,200,.1); }
+.orange { color: #ffbc7d; background: rgba(255,188,125,.1); }
+
+.stat-value {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px;
+  margin: 17px 0 13px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 27px;
+  font-weight: 700;
+}
+
+.out-of, .unit {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.trend {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px;
+  color: #7be0ba;
+  margin-left: auto;
+}
+
+.mini-progress, .focus-track, .mastery-track {
+  height: 5px;
+  border-radius: 10px;
+  background: #292c46;
+  overflow: hidden;
+}
+
+.mini-progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #8c70f8, #c0b2ff);
+}
+
+.stat-foot {
+  color: var(--muted);
+  font-size: 9px;
+  margin-top: 12px;
+}
+
+.concept-dots {
+  display: flex;
+  gap: 5px;
+}
+
+.concept-dots i {
+  height: 5px;
+  flex: 1;
+  border-radius: 5px;
+  background: var(--purple);
+}
+
+.concept-dots .empty {
+  background: #292c46;
+}
+
+.week-bars {
+  display: flex;
+  align-items: end;
+  gap: 6px;
+  height: 27px;
+}
+
+.week-bars i {
+  flex: 1;
+  background: rgba(255,144,200,.55);
+  border-radius: 3px 3px 0 0;
+}
+
+.week-bars .bar-today {
+  background: #ff90c8;
+}
+
+.streak-line {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 17px;
+  margin-top: 24px;
+}
+
+.panel {
+  padding: 22px;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.panel-header h3, .lesson-card h3 {
+  font-size: 14px;
+}
+
+.panel-header p {
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+.panel-header select {
+  background: #0c0f20;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 10px;
+}
+
+.chart-legend {
+  display: flex;
+  gap: 15px;
+  color: var(--muted);
+  font-size: 9px;
+  margin-bottom: 20px;
+}
+
+.chart-legend i {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.legend-purple { background: var(--purple); }
+.legend-cyan { background: var(--cyan); }
+
+.chart-wrap {
+  display: flex;
+  gap: 10px;
+}
+
+.y-labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 9px;
+  color: #777b9b;
+  padding-bottom: 25px;
+}
+
+.chart-main {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+}
+
+.chart-grid {
+  position: absolute;
+  inset: 0 0 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.chart-grid i {
+  border-top: 1px dashed rgba(167,139,250,.12);
+}
+
+.chart-main svg {
+  position: relative;
+  width: 100%;
+  height: 170px;
+  overflow: visible;
+}
+
+.x-labels {
+  display: flex;
+  justify-content: space-between;
+  color: #777b9b;
+  font-size: 9px;
+}
+
+.focus-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.subject-icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.purple-bg { color: var(--purple); background: rgba(167,139,250,.12); }
+.cyan-bg { color: var(--cyan); background: rgba(64,217,238,.12); }
+.pink-bg { color: #ff90c8; background: rgba(255,144,200,.12); }
+
+.focus-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.focus-info > div:first-child {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.focus-info b {
+  font-size: 11px;
+}
+
+.focus-info small {
+  display: block;
+  color: var(--muted);
+  font-size: 9px;
+  margin: 5px 0 8px;
+}
+
+.level-pill {
+  font-size: 8px;
+  color: #c4b5fd;
+  background: rgba(167,139,250,.1);
+  padding: 5px 7px;
+  border-radius: 5px;
+}
+
+.focus-track {
+  height: 4px;
+}
+
+.focus-track span, .mastery-track span {
+  display: block;
+  height: 100%;
+  background: var(--purple);
+  border-radius: inherit;
+}
+
+.cyan-track span { background: var(--cyan); }
+.pink-track span { background: #ff90c8; }
+
+.focus-percent {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.full-button {
+  width: 100%;
+}
+
+.next-heading {
+  margin-top: 38px;
+}
+
+.muted-small {
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+
+.lesson-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.lesson-card {
+  padding: 20px;
+  transition: transform .25s ease, border-color .25s ease;
+}
+
+.lesson-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(167,139,250,.4);
+}
+
+.lesson-top, .lesson-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.lesson-subject {
+  font-size: 8px;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.physics { color: var(--purple); }
+.math { color: var(--cyan); }
+.chem { color: #ff90c8; }
+
+.lesson-symbol {
+  font-size: 24px;
+  color: var(--purple);
+}
+
+.lesson-card h3 {
+  margin-top: 18px;
+}
+
+.lesson-card p {
+  font-size: 10px;
+  margin-top: 8px;
+  min-height: 43px;
+}
+
+.lesson-meta {
+  justify-content: flex-start;
+  margin-top: 15px;
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.lesson-action {
+  width: 100%;
+  margin-top: 17px;
+  padding: 10px;
+  background: rgba(167,139,250,.07);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: #d5caff;
+  font-size: 10px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 40px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+  font-size: 9px;
+  color: #747792;
+}
+
+/* TUTOR */
+
+.page-intro {
+  margin-bottom: 25px;
+}
+
+.page-intro h1 {
+  margin-bottom: 10px;
+}
+
+.page-intro .subheading {
+  font-size: 12px;
+}
+
+.tutor-layout, .diagnostic-layout, .support-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(240px, 1fr);
+  gap: 18px;
+}
+
+.chat-panel {
+  padding: 0;
+  overflow: hidden;
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 19px;
+  border-bottom: 1px solid var(--border);
+}
+
+.ai-avatar, .message-avatar {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: rgba(167,139,250,.12);
+  color: var(--purple);
+  font-size: 20px;
+}
+
+.chat-header h3 {
+  font-size: 13px;
+}
+
+.chat-header p {
+  font-size: 10px;
+  margin-top: 4px;
+}
+
+.chat-header .level-pill {
+  margin-left: auto;
+}
+
+.chat-status i {
+  width: 5px;
+  height: 5px;
+}
+
+.chat-messages {
+  padding: 20px;
+  min-height: 320px;
+  max-height: 440px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.chat-message {
+  display: flex;
+  gap: 10px;
+  animation: messageIn .3s ease;
+}
+
+.message-avatar {
+  width: 29px;
+  height: 29px;
+  flex-shrink: 0;
+  font-size: 15px;
+}
+
+.chat-message > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.chat-message b {
+  font-size: 10px;
+}
+
+.chat-message p {
+  margin-top: 6px;
+  font-size: 12px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.chat-message.user {
+  flex-direction: row-reverse;
+}
+
+.chat-message.user > div {
+  text-align: right;
+}
+
+.chat-message.user .message-avatar {
+  background: rgba(64,217,238,.12);
+  color: var(--cyan);
+}
+
+.chat-message.user p {
+  display: inline-block;
+  text-align: left;
+  background: rgba(64,217,238,.07);
+  border: 1px solid rgba(64,217,238,.13);
+  padding: 11px 13px;
+  border-radius: 12px 4px 12px 12px;
+}
+
+.prompt-chip {
+  margin: 5px 3px 0 0;
+  background: rgba(167,139,250,.08);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: #cdbfff;
+  padding: 7px 10px;
+  font-size: 10px;
+}
+
+.chat-input-row {
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+  border-top: 1px solid var(--border);
+}
+
+.chat-input-row input {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid var(--border);
+  background: #0c0f20;
+  color: white;
+  padding: 13px;
+  border-radius: 10px;
+  outline: none;
+}
+
+.send-button {
+  width: 44px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--purple);
+  color: #090b18;
+  font-size: 23px;
+}
+
+.send-button:hover {
+  background: #c0b2ff;
+}
+
+.chat-disclaimer {
+  padding: 0 15px 15px;
+  font-size: 9px;
+  color: #777b9b;
+}
+
+.typing-dots {
+  display: inline-flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.typing-dots i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--purple);
+  animation: typing .7s ease-in-out infinite alternate;
+}
+
+.typing-dots i:nth-child(2) { animation-delay: .2s; }
+.typing-dots i:nth-child(3) { animation-delay: .4s; }
+
+.tutor-side h3 {
+  font-size: 16px;
+  margin: 12px 0 18px;
+}
+
+.tool-card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 12px;
+  border-radius: 11px;
+  color: white;
+  margin-top: 10px;
+}
+
+.tool-card:hover {
+  background: rgba(167,139,250,.07);
+}
+
+.tool-icon {
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 9px;
+}
+
+.tool-card > span:nth-child(2) {
+  flex: 1;
+}
+
+.tool-card b, .tool-card small {
+  display: block;
+}
+
+.tool-card b { font-size: 10px; }
+.tool-card small { font-size: 9px; color: var(--muted); margin-top: 5px; }
+
+.tutor-note {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 11px;
+  background: rgba(64,217,238,.05);
+  color: var(--cyan);
+  font-size: 11px;
+}
+
+.tutor-note p {
+  font-size: 10px;
+  margin-top: 7px;
+}
+
+/* SYLLABUS */
+
+.syllabus-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 15px;
+  align-items: end;
+}
+
+.syllabus-controls .field-label {
+  margin-top: 0;
+}
+
+.syllabus-output {
+  margin-top: 20px;
+}
+
+.syllabus-unit {
+  padding: 15px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.syllabus-unit b {
+  font-size: 12px;
+}
+
+.syllabus-unit p {
+  font-size: 11px;
+  margin-top: 6px;
+}
+
+.syllabus-content {
+  margin-bottom: 20px;
+}
+
+.small-note {
+  font-size: 10px;
+  margin-top: 18px;
+}
+
+.small-note a {
+  color: var(--cyan);
+}
+
+/* GALAXY */
+
+.galaxy-panel {
+  overflow: hidden;
+}
+
+.galaxy-stage {
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at center, rgba(120,92,255,.1), transparent 65%);
+  border-radius: 14px;
+}
+
+.galaxy-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(#8d82c8 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: .18;
+}
+
+.galaxy-lines {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+}
+
+.galaxy-lines path {
+  stroke: rgba(167,139,250,.3);
+  stroke-width: 1;
+  fill: none;
+}
+
+.node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(167,139,250,.35);
+  background: rgba(17,20,38,.96);
+  color: var(--text);
+  border-radius: 12px;
+  min-width: 110px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 0 20px rgba(167,139,250,.06);
+  z-index: 2;
+}
+
+.node:hover, .node.selected {
+  border-color: var(--cyan);
+  box-shadow: 0 0 25px rgba(64,217,238,.12);
+}
+
+.node > span { color: var(--cyan); font-size: 20px; }
+.node b { font-size: 10px; }
+.node small { font-size: 7px; color: var(--muted); }
+
+.node-main {
+  min-width: 135px;
+  padding: 18px;
+  border-color: var(--purple);
+}
+
+.node-main > span { font-size: 26px; }
+
+.node-small {
+  min-width: 85px;
+}
+
+.concept-detail {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+}
+
+.detail-symbol {
+  font-size: 30px;
+  color: var(--cyan);
+}
+
+.concept-detail > div:nth-child(2) {
+  flex: 1;
+}
+
+.concept-detail h3 {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.concept-detail p {
+  font-size: 10px;
+}
+
+/* DIAGNOSTIC */
+
+.quiz-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 9px;
+  color: var(--muted);
+}
+
+.quiz-progress {
+  height: 5px;
+  background: #292c46;
+  border-radius: 5px;
+  margin: 18px 0 25px;
+  overflow: hidden;
+}
+
+.quiz-progress span {
+  display: block;
+  width: 20%;
+  height: 100%;
+  background: var(--purple);
+  transition: width .3s ease;
+}
+
+.quiz-panel h2 {
+  font-size: 20px;
+}
+
+.quiz-panel > p, #questionHint {
+  font-size: 11px;
+  margin-top: 9px;
+}
+
+.answer-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.answer-option {
+  text-align: left;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  font-size: 11px;
+}
+
+.answer-option:hover, .answer-option.selected {
+  border-color: var(--purple);
+  background: rgba(167,139,250,.09);
+}
+
+.answer-option.correct {
+  border-color: #4be2b3;
+  background: rgba(75,226,179,.08);
+}
+
+.answer-option.incorrect {
+  border-color: #ff8398;
+  background: rgba(255,131,152,.08);
+}
+
+.quiz-controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.quiz-controls button:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+.quiz-side h3 {
+  margin: 15px 0 10px;
+  font-size: 16px;
+}
+
+.quiz-side p {
+  font-size: 11px;
+}
+
+.side-icon {
+  color: var(--purple);
+  font-size: 28px;
+}
+
+.side-stat {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  padding: 13px 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.side-stat b {
+  color: var(--text);
+}
+
+.quiz-result {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+/* PROGRESS */
+
+.mastery-row {
+  display: grid;
+  grid-template-columns: 35px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  margin: 18px 0;
+}
+
+.mastery-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+}
+
+.mastery-row b, .mastery-row small {
+  display: block;
+}
+
+.mastery-row b { font-size: 11px; }
+.mastery-row small { font-size: 9px; color: var(--muted); margin-top: 4px; }
+.mastery-row strong { font-size: 11px; }
+
+.mastery-track {
+  grid-column: 2 / 4;
+}
+
+.next-step-icon {
+  color: var(--purple);
+  font-size: 30px;
+}
+
+.next-step-panel h3 {
+  margin: 10px 0;
+  font-size: 15px;
+}
+
+.next-step-panel p {
+  font-size: 11px;
+  margin-bottom: 18px;
+}
+
+.progress-content {
+  margin-top: 22px;
+}
+
+/* SUPPORT */
+
+.support-panel h3 {
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+.support-panel > p {
+  font-size: 11px;
+  margin-bottom: 18px;
+}
+
+.support-panel form .primary-button {
+  margin-top: 20px;
+}
+
+.support-panel textarea {
+  resize: vertical;
+}
+
+.faq-item {
+  padding: 15px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.faq-item b {
+  font-size: 11px;
+}
+
+.faq-item p {
+  margin-top: 7px;
+  font-size: 10px;
+}
+
+.support-result {
+  margin-top: 18px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--cyan);
+  font-size: 11px;
+}
+
+/* TOAST AND ANIMATIONS */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 25px;
+  transform: translate(-50%, 20px);
+  opacity: 0;
+  pointer-events: none;
+  padding: 12px 18px;
+  background: #20233c;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: white;
+  font-size: 11px;
+  box-shadow: 0 15px 40px rgba(0,0,0,.3);
+  transition: .25s ease;
+  z-index: 1000;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes messageIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes rotate {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes blink {
+  0%, 45%, 50%, 100% { opacity: 1; }
+  47%, 49% { opacity: .2; }
+}
+
+@keyframes typing {
+  to { opacity: .25; transform: translateY(-4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1100px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-visual {
+    right: -25px;
+    opacity: .65;
+  }
+
+  .onboarding-screen {
+    gap: 25px;
+    padding: 30px;
+  }
+}
+
+@media (max-width: 800px) {
+  .onboarding-screen {
+    grid-template-columns: 1fr;
+    padding: 22px 15px;
+  }
+
+  .onboarding-card {
+    padding: 25px;
+  }
+
+  .onboarding-side {
+    display: none;
+  }
+
+  .sidebar {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-105%);
+    overflow-y: auto;
+    box-shadow: 15px 0 50px rgba(0,0,0,.4);
+  }
+
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  .main-area {
+    padding: 0 18px 30px;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+
+  .topbar {
+    min-height: 65px;
+  }
+
+  .welcome-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .content-grid, .tutor-layout, .diagnostic-layout, .support-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lesson-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lesson-card p {
+    min-height: 0;
+  }
+
+  .hero-visual {
+    opacity: .2;
+    right: -80px;
+  }
+
+  .syllabus-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .concept-detail {
+    flex-wrap: wrap;
+  }
+
+  .concept-detail > div:nth-child(2) {
+    min-width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .onboarding-card h1 {
+    font-size: 29px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+  }
+
+  .stat-card {
+    padding: 12px;
+  }
+
+  .stat-head {
+    font-size: 8px;
+  }
+
+  .stat-value {
+    font-size: 22px;
+  }
+
+  .status-pill {
+    display: none;
+  }
+
+  .top-actions {
+    gap: 8px;
+  }
+
+  .hero-card {
+    padding: 24px;
+  }
+
+  .hero-card h2 {
+    font-size: 30px;
+  }
+
+  .hero-foot {
+    left: 20px;
+    right: 20px;
+  }
+
+  .section-heading h2 {
+    font-size: 16px;
+  }
+
+  .muted-small {
+    display: none;
+  }
+
+  .galaxy-stage {
+    height: 340px;
+  }
+
+  .node {
+    min-width: 75px;
+    padding: 8px 5px;
+  }
+
+  .node b {
+    font-size: 8px;
+  }
+
+  .node small {
+    font-size: 6px;
+  }
+
+  .node-main {
+    min-width: 95px;
+  }
+
+  .node-small {
+    min-width: 65px;
+  }
+
+  .footer {
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="glow glow-one"></div>
+<div class="glow glow-two"></div>
+
+<!-- =====================================
+     ONBOARDING / WELCOME
+====================================== -->
+
+<section class="onboarding-screen" id="onboardingScreen">
+
+  <div class="onboarding-card">
+
+    <a class="brand" href="#">
+      <span class="brand-mark"><span></span><span></span><span></span></span>
+      <span>MINDORA<span class="brand-ai"> AI</span>
+        <small>LEARNING INTELLIGENCE</small>
+      </span>
+    </a>
+
+    <div class="onboarding-progress">
+      <i class="step-active"></i><i></i><i></i>
+    </div>
+
+    <div class="eyebrow" style="margin-top:25px">
+      <span>✦</span> YOUR LEARNING JOURNEY STARTS HERE
+    </div>
+
+    <h1>First, tell us about <span>your world.</span></h1>
+
+    <p class="onboarding-copy">
+      Personalise your learning space with your education details and goals.
+    </p>
+
+    <form id="onboardingForm">
+
+      <label class="field-label" for="studentName">
+        WHAT SHOULD WE CALL YOU?
+      </label>
+
+      <input
+        class="text-field"
+        id="studentName"
+        placeholder="Enter your name"
+        maxlength="40"
+        autocomplete="given-name"
+        required
+      >
+
+      <label class="field-label" for="studentClass">
+        WHICH CLASS ARE YOU STUDYING?
+      </label>
+
+      <select class="text-field" id="studentClass" required>
+        <option value="">Choose your class</option>
+        <option value="6">Class 6</option>
+        <option value="7">Class 7</option>
+        <option value="8">Class 8</option>
+        <option value="9">Class 9</option>
+        <option value="10">Class 10</option>
+        <option value="11">Class 11</option>
+        <option value="12">Class 12</option>
+        <option value="college">College / University</option>
+        <option value="other">Other</option>
+      </select>
+
+      <!-- COLLEGE DETAILS: APPEAR WHEN COLLEGE IS SELECTED -->
+
+      <div id="departmentWrap" class="hidden">
+
+        <label class="field-label" for="studentCollege">
+          YOUR COLLEGE
+        </label>
+
+        <select class="text-field" id="studentCollege">
+          <option value="vjcet">
+            Viswajyothi College of Engineering and Technology (VJCET)
+          </option>
+          <option value="other">Other college / university</option>
+        </select>
+
+        <label class="field-label" for="studentDepartment">
+          DEPARTMENT / PROGRAMME
+        </label>
+
+        <select class="text-field" id="studentDepartment">
+          <option value="">Choose your department</option>
+          <option value="Artificial Intelligence and Data Science">
+            B.Tech Artificial Intelligence and Data Science
+          </option>
+          <option value="Civil Engineering">
+            B.Tech Civil Engineering
+          </option>
+          <option value="Computer Science and Design">
+            B.Tech Computer Science and Design
+          </option>
+          <option value="Computer Science and Engineering">
+            B.Tech Computer Science and Engineering
+          </option>
+          <option value="Electronics and Communication Engineering">
+            B.Tech Electronics and Communication Engineering
+          </option>
+          <option value="Electrical and Electronics Engineering">
+            B.Tech Electrical and Electronics Engineering
+          </option>
+          <option value="Information Technology">
+            B.Tech Information Technology
+          </option>
+          <option value="Mechanical Engineering">
+            B.Tech Mechanical Engineering
+          </option>
+          <option value="Hotel Management and Catering Technology">
+            BHMCT
+          </option>
+          <option value="MBA">MBA</option>
+          <option value="M.Tech Computer Science and Engineering">
+            M.Tech Computer Science and Engineering
+          </option>
+          <option value="M.Tech Electronics and Communication Engineering (VLSI and Embedded Systems)">
+            M.Tech ECE — VLSI and Embedded Systems
+          </option>
+          <option value="M.Tech Industrial Engineering and Management">
+            M.Tech Industrial Engineering and Management
+          </option>
+          <option value="Other">Other</option>
+        </select>
+
+        <label class="field-label" for="studentCourse">
+          COURSE / DEGREE
+        </label>
+
+        <input
+          class="text-field"
+          id="studentCourse"
+          placeholder="e.g. B.Tech"
+          value="B.Tech"
+        >
+
+        <label class="field-label" for="studentSemester">
+          CURRENT SEMESTER
+        </label>
+
+        <select class="text-field" id="studentSemester">
+          <option value="S1">Semester 1</option>
+          <option value="S2">Semester 2</option>
+          <option value="S3">Semester 3</option>
+          <option value="S4">Semester 4</option>
+          <option value="S5">Semester 5</option>
+          <option value="S6">Semester 6</option>
+          <option value="S7">Semester 7</option>
+          <option value="S8">Semester 8</option>
+        </select>
+
+      </div>
+
+      <label class="field-label" for="studentBoard">
+        YOUR CURRICULUM
+      </label>
+
+      <select class="text-field" id="studentBoard">
+        <option value="CBSE">CBSE</option>
+        <option value="State Board">State Board</option>
+        <option value="ICSE">ICSE / ISC</option>
+        <option value="Other">Other / Not sure</option>
+      </select>
+
+      <button class="primary-button onboarding-submit" type="submit">
+        Build my learning space →
+      </button>
+
+      <p class="onboarding-note">
+        ✦ Your personal learning space starts here.
+      </p>
+
+    </form>
+
+    <button class="onboarding-login-link" id="openAuthFromWelcome">
+      Already have an account? <b>Log in</b>
+    </button>
+
+  </div>
+
+  <div class="onboarding-side">
+
+    <div class="ultron-stage">
+
+      <div class="robot-halo"></div>
+      <div class="robot-halo halo-two"></div>
+      <div class="robot-ring"></div>
+      <div class="robot-ring ring-two"></div>
+
+      <div class="robot-head">
+        <div class="robot-crest"></div>
+        <div class="robot-eye eye-left"></div>
+        <div class="robot-eye eye-right"></div>
+        <div class="robot-nose"></div>
+        <div class="robot-mouth"></div>
+        <div class="robot-jaw"></div>
+      </div>
+
+      <div class="robot-caption">
+        <i></i> MINDORA INTELLIGENCE ONLINE
+      </div>
+
+    </div>
+
+    <div class="onboarding-side-copy">
+
+      <span class="tiny-label">YOUR PERSONAL LEARNING INTELLIGENCE</span>
+
+      <h2>Not just learning.<br><span>Understanding.</span></h2>
+
+      <p>
+        A study companion designed to help you understand concepts,
+        practise questions, and build better learning habits.
+      </p>
+
+      <div class="side-points">
+        <span>✦ Personalised topics</span>
+        <span>✦ Interactive practice</span>
+        <span>✦ Learn at your pace</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================
+     LOGIN MODAL
+====================================== -->
+
+<div class="hidden" id="authModal"
+     style="position:fixed;inset:0;background:#050611ed;z-index:200;
+     display:grid;place-items:center;padding:20px">
+
+  <div class="onboarding-card" style="position:relative">
+
+    <button id="closeAuth"
+      style="position:absolute;right:20px;top:15px;background:none;
+      border:0;color:white;font-size:26px">×</button>
+
+    <div class="brand">
+      <span class="brand-mark"><span></span><span></span><span></span></span>
+      <span>MINDORA<span class="brand-ai"> AI</span></span>
+    </div>
+
+    <h2 id="authTitle" style="margin-top:25px">Welcome <span>back.</span></h2>
+
+    <p id="authSubtitle" style="font-size:12px;margin-top:8px">
+      Log in to your learning space.
+    </p>
+
+    <div style="display:flex;gap:10px;margin-top:20px">
+      <button class="secondary-button auth-tab active" data-auth-mode="login">
+        Log in
+      </button>
+      <button class="secondary-button auth-tab" data-auth-mode="signup">
+        Sign up
+      </button>
+    </div>
+
+    <form id="authForm">
+
+      <div id="authNameWrap" class="hidden">
+        <label class="field-label" for="authName">YOUR NAME</label>
+        <input class="text-field" id="authName" placeholder="Your name">
+      </div>
+
+      <label class="field-label" for="authEmail">EMAIL ADDRESS</label>
+      <input class="text-field" id="authEmail" type="email"
+        placeholder="you@example.com" required>
+
+      <label class="field-label" for="authPassword">PASSWORD</label>
+      <input class="text-field" id="authPassword" type="password"
+        minlength="6" placeholder="At least 6 characters" required>
+
+      <p id="authMessage" style="font-size:11px;margin-top:10px"></p>
+
+      <button class="primary-button onboarding-submit" id="authSubmit">
+        Log in →
+      </button>
+
+    </form>
+
+    <p style="font-size:10px;margin-top:18px">
+      Prototype only. Account information is stored in this browser.
+      Do not use a real password.
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================
+     MAIN APPLICATION
+====================================== -->
+
+<div class="app-shell hidden" id="appShell">
+
+  <aside class="sidebar" id="sidebar">
+
+    <a class="brand" href="#" data-home>
+      <span class="brand-mark"><span></span><span></span><span></span></span>
+      <span>MINDORA<span class="brand-ai"> AI</span>
+        <small>LEARNING INTELLIGENCE</small>
+      </span>
+    </a>
+
+    <div class="workspace-label">WORKSPACE</div>
+
+    <nav class="nav-list">
+
+      <button class="nav-item active" data-page="overview">
+        <span class="nav-icon">⌂</span> Home
+      </button>
+
+      <button class="nav-item" data-page="diagnostic">
+        <span class="nav-icon">⌁</span> Test & Practice
+        <span class="nav-badge">NEW</span>
+      </button>
+
+      <button class="nav-item" data-page="galaxy">
+        <span class="nav-icon">✳</span> Knowledge galaxy
+      </button>
+
+      <button class="nav-item" data-page="tutor">
+        <span class="nav-icon">✧</span> AI Interaction
+      </button>
+
+      <button class="nav-item" data-page="syllabus">
+        <span class="nav-icon">▤</span> Syllabus & Summary
+      </button>
+
+      <button class="nav-item" data-page="support">
+        <span class="nav-icon">☏</span> Customer Care
+      </button>
+
+      <button class="nav-item" data-page="progress">
+        <span class="nav-icon">▥</span> My progress
+      </button>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+      <div class="streak-card">
+        <div class="streak-top">
+          <span class="streak-icon">✦</span>
+          <span class="tiny-label">YOUR MOMENTUM</span>
+        </div>
+
+        <div class="streak-number">Your learning journey 🔥</div>
+
+        <div class="streak-copy">
+          Small steps. Extraordinary growth.
+        </div>
+
+        <div class="streak-days">
+          <i class="done">M</i><i class="done">T</i><i class="done">W</i>
+          <i class="done">T</i><i class="done">F</i><i class="done">S</i>
+          <i class="today">S</i>
+        </div>
+      </div>
+
+      <button class="profile-row" id="profileButton">
+        <span class="avatar" id="profileAvatar">S</span>
+
+        <span class="profile-text">
+          <b id="profileName">Student</b>
+          <small id="profileClass">Your learning space</small>
+        </span>
+
+        <span class="dots">•••</span>
+      </button>
+
+      <button class="logout-button" id="logoutButton">
+        <span>↪</span> Log out
+      </button>
+
+    </div>
+
+  </aside>
+
+  <main class="main-area">
+
+    <header class="topbar">
+
+      <button class="mobile-menu" id="menuButton">☰</button>
+
+      <div class="breadcrumb">
+        Workspace <span>/</span>
+        <b id="breadcrumbCurrent">Overview</b>
+      </div>
+
+      <div class="top-actions">
+        <span class="status-pill"><i></i> SYSTEM ONLINE</span>
+        <span class="top-avatar" id="topAvatar">S</span>
+      </div>
+
+    </header>
+
+    <!-- HOME -->
+
+    <section class="page active-page" id="page-overview">
+
+      <div class="welcome-row">
+
+        <div>
+          <div class="eyebrow">✦ YOUR PERSONAL LEARNING DASHBOARD</div>
+
+          <h1>Your potential has <span>no limits.</span></h1>
+
+          <p class="subheading">
+            Every concept you master brings your future closer.
+            Let's make today count.
+          </p>
+        </div>
+
+        <button class="primary-button" data-go="diagnostic">
+          ＋ Start a learning scan ↗
+        </button>
+
+      </div>
+
+      <div class="hero-card">
+
+        <div class="hero-content">
+
+          <div class="hero-kicker">
+            <span class="live-dot"></span>
+            YOUR PERSONAL LEARNING ENGINE
+          </div>
+
+          <h2>You're closer than<br>you <span>think.</span></h2>
+
+          <p>
+            Turn your learning gaps into strengths with guided practice
+            and a study companion that works at your pace.
+          </p>
+
+          <button class="glass-button" data-go="galaxy">
+            Explore your knowledge galaxy ↗
+          </button>
+
+        </div>
+
+        <div class="hero-visual">
+          <div class="orbit orbit-a"></div>
+          <div class="orbit orbit-b"></div>
+          <div class="orbit orbit-c"></div>
+          <div class="planet">✦</div>
+          <div class="planet-dot dot-a"></div>
+          <div class="planet-dot dot-b"></div>
+          <div class="planet-dot dot-c"></div>
+        </div>
+
+        <div class="hero-foot">
+          <span>✧ Powered by adaptive learning</span>
+          <span>MINDORA AI</span>
+        </div>
+
+      </div>
+
+      <div class="section-heading">
+        <div>
+          <h2>Your learning at a glance</h2>
+          <p>Demo statistics to help visualise your learning space.</p>
+        </div>
+
+        <button class="text-button" data-go="progress">View progress →</button>
+      </div>
+
+      <div class="stats-grid">
+
+        <article class="stat-card">
+          <div class="stat-head">
+            <span>LEARNING SCORE</span>
+            <span class="stat-icon purple">✧</span>
+          </div>
+          <div class="stat-value">78<span class="out-of">/100</span></div>
+          <div class="mini-progress"><span style="width:78%"></span></div>
+          <div class="stat-foot">Illustrative demo score</div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-head">
+            <span>CONCEPTS MASTERED</span>
+            <span class="stat-icon cyan">◈</span>
+          </div>
+          <div class="stat-value">24<span class="out-of">/32</span></div>
+          <div class="concept-dots">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="empty"></i>
+          </div>
+          <div class="stat-foot">Illustrative demo data</div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-head">
+            <span>QUESTIONS ASKED</span>
+            <span class="stat-icon pink">◷</span>
+          </div>
+          <div class="stat-value" id="homeAnswered">0</div>
+          <div class="stat-foot">Your current session</div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-head">
+            <span>YOUR COURSE</span>
+            <span class="stat-icon orange">♨</span>
+          </div>
+          <div class="stat-value" style="font-size:18px" id="homeCourse">Student</div>
+          <div class="stat-foot" id="homeSemester">Choose your education details</div>
+        </article>
+
+      </div>
+
+      <div class="section-heading">
+        <div>
+          <h2>Pick up where you left off</h2>
+          <p>One focused session can change your whole week.</p>
+        </div>
+      </div>
+
+      <div class="lesson-grid">
+
+        <article class="lesson-card">
+          <div class="lesson-top">
+            <span class="lesson-subject physics">PHYSICS</span>
+            <span class="lesson-symbol">∿</span>
+          </div>
+          <h3>Current Electricity</h3>
+          <p>Understand current, voltage, resistance, and circuit laws.</p>
+          <div class="lesson-meta">◷ 18 min · Guided learning</div>
+          <button class="lesson-action" data-go="tutor">Study this concept →</button>
+        </article>
+
+        <article class="lesson-card">
+          <div class="lesson-top">
+            <span class="lesson-subject math">MATHEMATICS</span>
+            <span class="lesson-symbol">∫</span>
+          </div>
+          <h3>Definite Integrals</h3>
+          <p>Build intuition with examples and step-by-step practice.</p>
+          <div class="lesson-meta">◷ 24 min · Practice</div>
+          <button class="lesson-action" data-go="diagnostic">Start practice →</button>
+        </article>
+
+        <article class="lesson-card">
+          <div class="lesson-top">
+            <span class="lesson-subject chem">CHEMISTRY</span>
+            <span class="lesson-symbol">⌬</span>
+          </div>
+          <h3>Reaction Mechanisms</h3>
+          <p>Explore the patterns behind organic reactions.</p>
+          <div class="lesson-meta">◷ 15 min · Concepts</div>
+          <button class="lesson-action" data-go="tutor">Explore concepts →</button>
+        </article>
+
+      </div>
+
+      <footer class="footer">
+        <span>© 2026 MINDORA AI</span>
+        <span>Designed for curious minds ✦</span>
+        <span>Learning demo</span>
+      </footer>
+
+    </section>
+
+    <!-- AI TUTOR -->
+
+    <section class="page" id="page-tutor">
+
+      <div class="page-intro">
+        <div class="eyebrow">✦ YOUR PERSONAL STUDY COMPANION</div>
+        <h1>Welcome to the <span>study room.</span></h1>
+        <p class="subheading">
+          Ask questions and practise until the concept clicks.
+        </p>
+      </div>
+
+      <div class="tutor-layout">
+
+        <div class="panel chat-panel">
+
+          <div class="chat-header">
+            <div class="ai-avatar">✧</div>
+
+            <div>
+              <h3>Mindora Study Buddy</h3>
+              <p class="chat-status"><i></i> Demo assistant online</p>
+            </div>
+
+            <span class="level-pill">STUDY MODE</span>
+          </div>
+
+          <div class="chat-messages" id="chatMessages">
+
+            <div class="chat-message bot">
+              <span class="message-avatar">✧</span>
+              <div>
+                <b>Mindora</b>
+                <p>
+                  Hey! 👋 I'm your study buddy. Ask me about a concept,
+                  request an example, or ask for a study plan.
+                </p>
+              </div>
+            </div>
+
+            <div class="chat-message bot">
+              <span class="message-avatar">✧</span>
+              <div>
+                <b>Mindora</b>
+                <p>
+                  Try one of these:
+                  <br>
+                  <button class="prompt-chip" data-prompt="Explain Ohm's law with an example">Explain Ohm's law</button>
+                  <button class="prompt-chip" data-prompt="Give me a study plan">Make a study plan</button>
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <form class="chat-input-row" id="chatForm">
+            <input id="chatInput" placeholder="Ask a study question..." autocomplete="off" required>
+            <button class="send-button" type="submit" aria-label="Send">↑</button>
+          </form>
+
+          <div class="chat-disclaimer">
+            Demo mode: connect an AI backend for real AI-generated answers.
+          </div>
+
+        </div>
+
+        <aside class="panel tutor-side">
+
+          <span class="tiny-label">QUICK TOOLS</span>
+
+          <h3>Make your next session count.</h3>
+
+          <button class="tool-card" data-prompt="Explain Ohm's law with an example">
+            <span class="tool-icon purple-bg">∿</span>
+            <span>
+              <b>Explain a concept</b>
+              <small>Simple explanations</small>
+            </span>
+            <span>→</span>
+          </button>
+
+          <button class="tool-card" data-prompt="Give me a study plan">
+            <span class="tool-icon cyan-bg">▦</span>
+            <span>
+              <b>Build a study plan</b>
+              <small>Turn goals into steps</small>
+            </span>
+            <span>→</span>
+          </button>
+
+          <button class="tool-card" data-prompt="Quiz me on Physics">
+            <span class="tool-icon pink-bg">◇</span>
+            <span>
+              <b>Quick practice</b>
+              <small>Test what you know</small>
+            </span>
+            <span>→</span>
+          </button>
+
+          <div class="tutor-note">
+            ✦ <b>Learning tip</b>
+            <p>
+              Try explaining a concept in your own words.
+              It can help you discover what you still need to learn.
+            </p>
+          </div>
+
+        </aside>
+
+      </div>
+
+    </section>
+
+    <!-- KNOWLEDGE GALAXY -->
+
+    <section class="page" id="page-galaxy">
+
+      <div class="page-intro">
+        <div class="eyebrow">✦ CONCEPT CONNECTIONS</div>
+        <h1>Your knowledge <span>galaxy.</span></h1>
+        <p class="subheading">Select a concept to explore its learning path.</p>
+      </div>
+
+      <div class="panel galaxy-panel">
+
+        <div class="panel-header">
+          <div>
+            <span class="tiny-label">CONCEPT MAP</span>
+            <h3 style="margin-top:7px">Concept constellation</h3>
+          </div>
+          <span class="level-pill">INTERACTIVE MAP</span>
+        </div>
+
+        <div class="galaxy-stage">
+
+          <svg class="galaxy-lines" viewBox="0 0 800 440" preserveAspectRatio="none">
+            <path d="M400 220 L220 105 L90 190 M400 220 L595 105 L710 190 M400 220 L220 335 L95 300 M400 220 L595 335 L710 300 M220 105 L595 105 M220 335 L595 335"/>
+          </svg>
+
+          <button class="node node-main selected" data-concept="Current Electricity"
+            style="left:50%;top:50%">
+            <span>⚡</span><b>Current<br>Electricity</b><small>CORE CONCEPT</small>
+          </button>
+
+          <button class="node" data-concept="Ohm's Law"
+            style="left:27.5%;top:24%">
+            <span>Ω</span><b>Ohm's Law</b><small>FOUNDATION</small>
+          </button>
+
+          <button class="node" data-concept="Resistance"
+            style="left:74%;top:24%">
+            <span>⌁</span><b>Resistance</b><small>FOUNDATION</small>
+          </button>
+
+          <button class="node" data-concept="Kirchhoff's Laws"
+            style="left:27.5%;top:76%">
+            <span>⌘</span><b>Kirchhoff's Laws</b><small>APPLICATION</small>
+          </button>
+
+          <button class="node" data-concept="Electrical Power"
+            style="left:74%;top:76%">
+            <span>ϟ</span><b>Electrical Power</b><small>APPLICATION</small>
+          </button>
+
+          <button class="node node-small" data-concept="Circuit Analysis"
+            style="left:11%;top:44%">
+            <span>∿</span><b>Circuit Analysis</b>
+          </button>
+
+          <button class="node node-small" data-concept="Series and Parallel Circuits"
+            style="left:89%;top:44%">
+            <span>⫘</span><b>Series & Parallel</b>
+          </button>
+
+        </div>
+
+        <div class="concept-detail">
+          <div class="detail-symbol" id="conceptSymbol">⚡</div>
+          <div>
+            <span class="tiny-label">SELECTED CONCEPT</span>
+            <h3 id="conceptTitle">Current Electricity</h3>
+            <p id="conceptDescription">
+              The flow of electric charge through a conductor.
+              Start with current, voltage, and resistance before studying circuit laws.
+            </p>
+          </div>
+          <button class="secondary-button" id="studyConcept">Study this →</button>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- TEST AND PRACTICE -->
+
+    <section class="page" id="page-diagnostic">
+
+      <div class="page-intro">
+        <div class="eyebrow">✦ PERSONALIZED PRACTICE</div>
+        <h1>Find your <span>missing pieces.</span></h1>
+        <p class="subheading">Answer five sample Physics questions.</p>
+      </div>
+
+      <div class="diagnostic-layout">
+
+        <div class="panel quiz-panel">
+
+          <div class="quiz-top">
+            <span class="level-pill">PHYSICS</span>
+            <span id="questionCount">QUESTION 1 OF 5</span>
+          </div>
+
+          <div class="quiz-progress">
+            <span id="quizProgressBar"></span>
+          </div>
+
+          <div id="quizContent">
+            <h2 id="questionTitle">What does Ohm's law state?</h2>
+            <p id="questionHint">Choose the most accurate answer.</p>
+            <div class="answer-list" id="answerList"></div>
+          </div>
+
+          <div class="quiz-controls">
+            <button class="secondary-button" id="prevQuestion" disabled>
+              ← Previous
+            </button>
+            <button class="primary-button" id="nextQuestion" disabled>
+              Check answer →
+            </button>
+          </div>
+
+          <div id="quizResult" class="quiz-result hidden"></div>
+
+        </div>
+
+        <aside class="panel quiz-side">
+          <div class="side-icon">✧</div>
+          <h3>Your practice, your progress.</h3>
+          <p>
+            This sample quiz checks basic Physics concepts.
+            It is a demo, not an official examination.
+          </p>
+          <div class="side-stat"><span>Questions</span><b>05</b></div>
+          <div class="side-stat"><span>Estimated time</span><b>3 min</b></div>
+          <div class="side-stat"><span>Goal</span><b>Find gaps</b></div>
+        </aside>
+
+      </div>
+
+    </section>
+
+    <!-- SYLLABUS -->
+
+    <section class="page" id="page-syllabus">
+
+      <div class="page-intro">
+        <div class="eyebrow">✦ YOUR PERSONAL COURSE MAP</div>
+        <h1>Syllabus & <span>smart summaries.</span></h1>
+        <p class="subheading" id="syllabusSubtitle">
+          Explore subjects and create a study guide.
+        </p>
+      </div>
+
+      <div class="panel syllabus-controls">
+
+        <div>
+          <label class="field-label" for="syllabusSubject">SUBJECT / MODULE</label>
+          <select class="text-field" id="syllabusSubject">
+            <option>Core Concepts</option>
+            <option>Problem Solving</option>
+            <option>Applied Practice</option>
+            <option>Physics</option>
+            <option>Mathematics</option>
+            <option>Chemistry</option>
+            <option>Programming</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="field-label" for="syllabusTerm">SEMESTER / TERM</label>
+          <select class="text-field" id="syllabusTerm">
+            <option>Semester 1</option>
+            <option>Semester 2</option>
+            <option>Semester 3</option>
+            <option>Semester 4</option>
+            <option>Semester 5</option>
+            <option>Semester 6</option>
+            <option>Semester 7</option>
+            <option>Semester 8</option>
+            <option>Full course</option>
+          </select>
+        </div>
+
+        <button class="primary-button" id="generateSyllabus">
+          Generate study guide →
+        </button>
+
+      </div>
+
+      <div class="panel syllabus-output" style="margin-top:20px">
+
+        <div class="panel-header">
+          <div>
+            <h3 id="syllabusTitle">Your learning roadmap</h3>
+            <p id="syllabusMeta">Based on your selected education details</p>
+          </div>
+          <span class="level-pill">DEMO MODE</span>
+        </div>
+
+        <div id="syllabusContent" class="syllabus-content">
+
+          <div class="syllabus-unit">
+            <b>01 · Foundations</b>
+            <p>Core definitions, prerequisites, and key concepts.</p>
+          </div>
+
+          <div class="syllabus-unit">
+            <b>02 · Applications</b>
+            <p>Worked examples, practical uses, and guided exercises.</p>
+          </div>
+
+          <div class="syllabus-unit">
+            <b>03 · Revision and assessment</b>
+            <p>Important concepts, a quick recap, and a self-check quiz.</p>
+          </div>
+
+        </div>
+
+        <button class="secondary-button" id="generateSummary">
+          Create a concise summary
+        </button>
+
+      </div>
+
+      <p class="small-note">
+        Demo study guides are not official university syllabi.
+        Verify your subjects, units, and examination requirements with your college.
+      </p>
+
+    </section>
+
+    <!-- CUSTOMER CARE -->
+
+    <section class="page" id="page-support">
+
+      <div class="page-intro">
+        <div class="eyebrow">✦ WE'RE HERE TO HELP</div>
+        <h1>Student <span>support.</span></h1>
+        <p class="subheading">Tell us what you need help with.</p>
+      </div>
+
+      <div class="support-grid">
+
+        <section class="panel support-panel">
+
+          <h3>Contact customer care</h3>
+
+          <p>
+            Prepare a support request. In this standalone demo,
+            the request stays in your browser and is not sent to a support team.
+          </p>
+
+          <form id="supportForm">
+
+            <label class="field-label" for="supportCategory">
+              WHAT DO YOU NEED HELP WITH?
+            </label>
+
+            <select class="text-field" id="supportCategory">
+              <option>Account and login</option>
+              <option>Syllabus or course content</option>
+              <option>AI tutor issue</option>
+              <option>Test and results</option>
+              <option>Feedback / suggestion</option>
+              <option>Other</option>
+            </select>
+
+            <label class="field-label" for="supportEmail">EMAIL (OPTIONAL)</label>
+            <input class="text-field" id="supportEmail" type="email"
+              placeholder="you@example.com">
+
+            <label class="field-label" for="supportMessage">DESCRIBE THE ISSUE</label>
+            <textarea class="text-field" id="supportMessage" rows="5"
+              placeholder="Tell us how we can help..." required></textarea>
+
+            <button class="primary-button" type="submit">
+              Prepare support request →
+            </button>
+
+          </form>
+
+          <div id="supportResult" class="support-result hidden"></div>
+
+        </section>
+
+        <aside class="panel support-panel">
+
+          <div class="side-icon">✧</div>
+          <h3>Mindora help centre</h3>
+
+          <div class="faq-item">
+            <b>How do I change my department?</b>
+            <p>Log out and complete the education form again.</p>
+          </div>
+
+          <div class="faq-item">
+            <b>Why isn't the AI responding like a real AI?</b>
+            <p>
+              This standalone file uses demo responses. A real AI requires
+              a configured backend service.
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <b>Is this syllabus official?</b>
+            <p>
+              No. Check your college's official curriculum for confirmed units
+              and examination requirements.
+            </p>
+          </div>
+
+        </aside>
+
+      </div>
+
+    </section>
+
+    <!-- PROGRESS -->
+
+    <section class="page" id="page-progress">
+
+      <div class="page-intro">
+        <div class="eyebrow">✦ YOUR GROWTH, VISUALIZED</div>
+        <h1>Progress that <span>means something.</span></h1>
+        <p class="subheading">Track your activity in this session.</p>
+      </div>
+
+      <div class="stats-grid">
+
+        <article class="stat-card">
+          <div class="stat-head">LEARNING SCORE</div>
+          <div class="stat-value">78<span class="out-of">/100</span></div>
+          <div class="mini-progress"><span style="width:78%"></span></div>
+          <div class="stat-foot">Illustrative demo score</div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-head">QUESTIONS ASKED</div>
+          <div class="stat-value" id="answeredStat">0</div>
+          <div class="stat-foot">Current session</div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-head">DIAGNOSTIC SCORE</div>
+          <div class="stat-value" id="diagnosticStat">—<span class="out-of">/5</span></div>
+          <div class="stat-foot">Complete the practice quiz</div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-head">CURRENT COURSE</div>
+          <div class="stat-value" style="font-size:17px" id="progressCourse">Student</div>
+          <div class="stat-foot" id="progressSemester">Education details</div>
+        </article>
+
+      </div>
+
+      <div class="content-grid progress-content">
+
+        <section class="panel">
+
+          <div class="panel-header">
+            <div>
+              <h3>Subject mastery</h3>
+              <p>Illustrative starting estimates</p>
+            </div>
+          </div>
+
+          <div class="mastery-row">
+            <span class="mastery-icon purple-bg">∿</span>
+            <div><b>Physics</b><small>Practise core concepts</small></div>
+            <strong>62%</strong>
+            <div class="mastery-track"><span style="width:62%"></span></div>
+          </div>
+
+          <div class="mastery-row">
+            <span class="mastery-icon cyan-bg">∫</span>
+            <div><b>Mathematics</b><small>Build consistency</small></div>
+            <strong>74%</strong>
+            <div class="mastery-track cyan-track"><span style="width:74%"></span></div>
+          </div>
+
+          <div class="mastery-row">
+            <span class="mastery-icon pink-bg">⌬</span>
+            <div><b>Chemistry</b><small>Review reactions</small></div>
+            <strong>86%</strong>
+            <div class="mastery-track pink-track"><span style="width:86%"></span></div>
+          </div>
+
+        </section>
+
+        <section class="panel next-step-panel">
+          <div class="next-step-icon">✧</div>
+          <h3>Your suggested next step</h3>
+          <p>Review a concept, ask the tutor a question, or try the diagnostic.</p>
+          <button class="primary-button" data-go="diagnostic">
+            Start practice →
+          </button>
+        </section>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<!-- =====================================
+     JAVASCRIPT — APP FUNCTIONALITY
+====================================== -->
+
+<script>
+(() => {
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+
+  const state = {
+    user: null,
+    questionsAsked: 0,
+    authMode: "login",
+    answers: {},
+    questionIndex: 0,
+    quizScore: null
+  };
+
+  const pages = [
+    "overview",
+    "diagnostic",
+    "galaxy",
+    "tutor",
+    "syllabus",
+    "support",
+    "progress"
+  ];
+
+  const pageNames = {
+    overview: "Overview",
+    diagnostic: "Test & Practice",
+    galaxy: "Knowledge Galaxy",
+    tutor: "AI Interaction",
+    syllabus: "Syllabus & Summary",
+    support: "Customer Care",
+    progress: "My Progress"
+  };
+
+  let toastTimer;
+
+  function toast(message) {
+    const el = $("toast");
+    el.textContent = message;
+    el.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer = setTimeout(() => {
+      el.classList.remove("show");
+    }, 2800);
+  }
+
+  function safeText(value) {
+    return String(value ?? "");
+  }
+
+  function getAccounts() {
+    try {
+      return JSON.parse(localStorage.getItem("mindoraAccounts") || "{}");
+    } catch {
+      return {};
+    }
+  }
+
+  function saveAccounts(accounts) {
+    try {
+      localStorage.setItem("mindoraAccounts", JSON.stringify(accounts));
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  function getEducationData() {
+    const collegeStudent = $("studentClass").value === "college";
+    const department = collegeStudent
+      ? $("studentDepartment").value
+      : "";
+
+    return {
+      name: $("studentName").value.trim(),
+      studentClass: $("studentClass").value,
+      college: collegeStudent ? $("studentCollege").value : "",
+      department,
+      course: collegeStudent ? $("studentCourse").value.trim() : "",
+      semester: collegeStudent ? $("studentSemester").value : "",
+      board: $("studentBoard").value
+    };
+  }
+
+  function getEducationSummary(user) {
+    if (!user) return "Your learning space";
+
+    if (user.studentClass === "college") {
+      const college = user.college === "vjcet"
+        ? "VJCET"
+        : "College";
+
+      return `${college} · ${user.course || "Course"} · ${user.semester || ""}`;
+    }
+
+    return user.studentClass
+      ? `Class ${user.studentClass}`
+      : "Your learning space";
+  }
+
+  function updateEducationFields() {
+    const isCollege = $("studentClass").value === "college";
+    $("departmentWrap").classList.toggle("hidden", !isCollege);
+
+    $("studentDepartment").required = isCollege;
+    $("studentCourse").required = isCollege;
+    $("studentSemester").required = isCollege;
+  }
+
+  function updateDegree() {
+    const department = $("studentDepartment").value;
+    const degree = $("studentCourse");
+
+    if (department === "MBA") {
+      degree.value = "MBA";
+    } else if (department === "Hotel Management and Catering Technology") {
+      degree.value = "BHMCT";
+    } else if (department.startsWith("M.Tech")) {
+      degree.value = "M.Tech";
+    } else if (department && department !== "Other") {
+      degree.value = "B.Tech";
+    } else if (department === "Other") {
+      degree.value = "";
+    }
+  }
+
+  function showPage(page) {
+    if (!pages.includes(page)) return;
+
+    document.querySelectorAll(".page").forEach(el => {
+      el.classList.toggle("active-page", el.id === `page-${page}`);
+    });
+
+    document.querySelectorAll(".nav-item").forEach(el => {
+      el.classList.toggle("active", el.dataset.page === page);
+    });
+
+    $("breadcrumbCurrent").textContent = pageNames[page] || "Overview";
+
+    $("sidebar").classList.remove("mobile-open");
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function updateProfile(user) {
+    const name = user.name || "Student";
+    const initials = name.trim().split(/\s+/)
+      .map(part => part[0])
+      .join("")
+      .slice(0, 2)
+      .toUpperCase();
+
+    $("profileName").textContent = name;
+    $("profileClass").textContent = getEducationSummary(user);
+    $("profileAvatar").textContent = initials;
+    $("topAvatar").textContent = initials;
+
+    $("homeCourse").textContent =
+      user.studentClass === "college"
+        ? (user.course || "College")
+        : user.studentClass
+          ? `Class ${user.studentClass}`
+          : "Student";
+
+    $("homeSemester").textContent =
+      user.studentClass === "college"
+        ? `${user.department || "Programme"} · ${user.semester || ""}`
+        : user.board || "Learning space";
+
+    $("progressCourse").textContent =
+      user.course || (
+        user.studentClass === "college"
+          ? "College"
+          : user.studentClass
+            ? `Class ${user.studentClass}`
+            : "Student"
+      );
+
+    $("progressSemester").textContent =
+      user.semester || user.board || "Education details";
+
+    $("syllabusSubtitle").textContent =
+      user.studentClass === "college"
+        ? `${user.college === "vjcet" ? "VJCET" : "College"} · ${user.department || "Your programme"}`
+        : `Personalise your study guide for ${getEducationSummary(user)}.`;
+  }
+
+  function openApp(user) {
+    state.user = user;
+
+    $("onboardingScreen").classList.add("hidden");
+    $("authModal").classList.add("hidden");
+    $("appShell").classList.remove("hidden");
+
+    updateProfile(user);
+    showPage("overview");
+
+    try {
+      sessionStorage.setItem("mindoraSession", JSON.stringify(user));
+    } catch {}
+
+    toast(`Welcome, ${user.name}!`);
+  }
+
+  function showWelcome() {
+    $("appShell").classList.add("hidden");
+    $("authModal").classList.add("hidden");
+    $("onboardingScreen").classList.remove("hidden");
+
+    $("sidebar").classList.remove("mobile-open");
+
+    state.user = null;
+
+    try {
+      sessionStorage.removeItem("mindoraSession");
+    } catch {}
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  // EDUCATION FORM
+
+  $("studentClass").addEventListener("change", updateEducationFields);
+  $("studentDepartment").addEventListener("change", updateDegree);
+
+  $("studentCollege").addEventListener("change", () => {
+    if ($("studentCollege").value === "other") {
+      toast("Other college selected. Enter your college details in your profile later.");
+    }
+  });
+
+  updateEducationFields();
+
+  $("onboardingForm").addEventListener("submit", event => {
+    event.preventDefault();
+
+    const user = getEducationData();
+
+    if (!user.name) {
+      toast("Please enter your name.");
+      return;
+    }
+
+    if (user.studentClass === "college") {
+      if (!user.department || !user.course || !user.semester) {
+        toast("Please complete your college, course and semester details.");
+        return;
+      }
+    }
+
+    openApp(user);
+  });
+
+  // LOGIN / SIGNUP DEMO
+
+  function setAuthMode(mode) {
+    state.authMode = mode;
+
+    const signup = mode === "signup";
+
+    $("authNameWrap").classList.toggle("hidden", !signup);
+    $("authName").required = signup;
+
+    $("authTitle").innerHTML = signup
+      ? "Create your <span>account.</span>"
+      : "Welcome <span>back.</span>";
+
+    $("authSubtitle").textContent = signup
+      ? "Create a local demo account."
+      : "Log in to your learning space.";
+
+    $("authSubmit").textContent = signup
+      ? "Create account →"
+      : "Log in →";
+
+    $("authMessage").textContent = "";
+
+    document.querySelectorAll(".auth-tab").forEach(button => {
+      button.classList.toggle("active", button.dataset.authMode === mode);
+    });
+  }
+
+  document.querySelectorAll("[data-auth-mode]").forEach(button => {
+    button.addEventListener("click", () => {
+      setAuthMode(button.dataset.authMode);
+    });
+  });
+
+  $("openAuthFromWelcome").addEventListener("click", () => {
+    $("authModal").classList.remove("hidden");
+    setAuthMode("login");
+  });
+
+  $("closeAuth").addEventListener("click", () => {
+    $("authModal").classList.add("hidden");
+  });
+
+  $("authForm").addEventListener("submit", event => {
+    event.preventDefault();
+
+    const email = $("authEmail").value.trim().toLowerCase();
+    const password = $("authPassword").value;
+    const accounts = getAccounts();
+
+    if (state.authMode === "signup") {
+      const name = $("authName").value.trim();
+
+      if (!name) {
+        $("authMessage").textContent = "Enter your name.";
+        return;
+      }
+
+      if (accounts[email]) {
+        $("authMessage").textContent = "An account already exists for this email.";
+        return;
+      }
+
+      accounts[email] = {
+        name,
+        password,
+        studentClass: "",
+        college: "",
+        department: "",
+        course: "",
+        semester: "",
+        board: ""
+      };
+
+      if (!saveAccounts(accounts)) {
+        $("authMessage").textContent = "Could not save the account in this browser.";
+        return;
+      }
+
+      $("authMessage").textContent =
+        "Account created. This is a local demo, not secure authentication.";
+
+      openApp(accounts[email]);
+      return;
+    }
+
+    const account = accounts[email];
+
+    if (!account || account.password !== password) {
+      $("authMessage").textContent =
+        "Account not found or password incorrect. Create an account first.";
+      return;
+    }
+
+    openApp(account);
+  });
+
+  // NAVIGATION
+
+  document.querySelectorAll("[data-page]").forEach(button => {
+    button.addEventListener("click", () => {
+      showPage(button.dataset.page);
+    });
+  });
+
+  document.querySelectorAll("[data-go]").forEach(button => {
+    button.addEventListener("click", () => {
+      showPage(button.dataset.go);
+    });
+  });
+
+  document.querySelectorAll("[data-home]").forEach(button => {
+    button.addEventListener("click", event => {
+      event.preventDefault();
+      showPage("overview");
+    });
+  });
+
+  $("menuButton").addEventListener("click", () => {
+    $("sidebar").classList.toggle("mobile-open");
+  });
+
+  $("profileButton").addEventListener("click", () => {
+    if (!state.user) return;
+    toast(getEducationSummary(state.user));
+  });
+
+  // LOGOUT
+
+  $("logoutButton").addEventListener("click", () => {
+    if (!confirm("Are you sure you want to log out?")) return;
+    showWelcome();
+    toast("You have returned to the welcome screen.");
+  });
+
+  // DEMO STUDY ASSISTANT
+  // This is rule-based sample logic, NOT a live AI model.
+
+  function demoReply(question) {
+    const q = question.toLowerCase();
+
+    if (q.includes("ohm")) {
+      return "Ohm's law states that voltage equals current multiplied by resistance: V = I × R. For example, if a circuit has a resistance of 4 Ω and a current of 2 A, its voltage is 8 V. This relationship applies under constant physical conditions.";
+    }
+
+    if (q.includes("newton")) {
+      return "Newton's three laws describe motion. First: an object maintains its state of motion unless acted on by a net external force. Second: net force equals mass multiplied by acceleration (F = ma). Third: forces occur in equal and opposite pairs acting on different objects.";
+    }
+
+    if (q.includes("study plan") || q.includes("timetable")) {
+      return "Here's a sample study plan:\n\n1. Spend 25 minutes reviewing one concept.\n2. Take a 5-minute break.\n3. Spend 25 minutes solving practice questions.\n4. Review your mistakes for 15 minutes.\n5. Finish by explaining the concept in your own words.\n\nAdjust the plan to your actual subjects and deadlines.";
+    }
+
+    if (q.includes("quiz") || q.includes("test me")) {
+      return "Let's practise! Question 1: What is the SI unit of electric current?\n\nA) Volt\nB) Ampere\nC) Ohm\nD) Watt\n\nChoose A, B, C or D.";
+    }
+
+    if (q.includes("integral")) {
+      return "Integration is the reverse process of differentiation in many common cases. For example, the integral of x² with respect to x is x³/3 + C, where C is the constant of integration. The constant is included because differentiation removes constants.";
+    }
+
+    if (q.includes("photosynthesis")) {
+      return "Photosynthesis is the process through which plants use light energy to make sugars from carbon dioxide and water. Oxygen is released as a by-product. Chlorophyll helps capture the light energy needed for this process.";
+    }
+
+    if (q.includes("hello") || q.includes("hi") || q.includes("hey")) {
+      return "Hey! 👋 What are you studying today? Ask me about a concept, request an example, or try a practice question.";
+    }
+
+    if (q.includes("explain") || q.includes("meaning") || q.includes("what is")) {
+      return "I can help you work through that topic. Try asking a more specific question, such as asking for a definition, a worked example, or a step-by-step explanation. This version uses demo responses, so it doesn't have the knowledge or reasoning ability of a live AI model.";
+    }
+
+    return "I received your question: \"" + question + "\"\n\nThis standalone version is currently running in demo mode. To generate genuinely personalised answers to any question, connect the chat to a real AI model through a backend API. Don't put a private API key directly in this HTML file.";
+  }
+
+  function addMessage(text, type) {
+    const container = $("chatMessages");
+
+    const message = document.createElement("div");
+    message.className = `chat-message ${type}`;
+
+    const avatar = document.createElement("span");
+    avatar.className = "message-avatar";
+    avatar.textContent = type === "bot" ? "✧" : "S";
+
+    const content = document.createElement("div");
+
+    const name = document.createElement("b");
+    name.textContent = type === "bot"
+      ? "Mindora"
+      : (state.user?.name || "You");
+
+    const paragraph = document.createElement("p");
+    paragraph.textContent = text;
+
+    content.append(name, paragraph);
+    message.append(avatar, content);
+    container.appendChild(message);
+
+    container.scrollTop = container.scrollHeight;
+
+    return message;
+  }
+
+  async function sendPrompt(prompt) {
+    const question = prompt.trim();
+
+    if (!question) return;
+
+    addMessage(question, "user");
+
+    state.questionsAsked++;
+
+    $("homeAnswered").textContent = state.questionsAsked;
+    $("answeredStat").textContent = state.questionsAsked;
+
+    const container = $("chatMessages");
+    const typing = document.createElement("div");
+
+    typing.className = "chat-message bot";
+    typing.innerHTML = `
+      <span class="message-avatar">✧</span>
+      <div>
+        <b>Mindora</b>
+        <div class="typing-dots"><i></i><i></i><i></i></div>
+      </div>
+    `;
+
+    container.appendChild(typing);
+    container.scrollTop = container.scrollHeight;
+
+    await new Promise(resolve => setTimeout(resolve, 650));
+
+    typing.remove();
+
+    addMessage(demoReply(question), "bot");
+  }
+
+  $("chatForm").addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const input = $("chatInput");
+    const question = input.value.trim();
+
+    if (!question) return;
+
+    input.value = "";
+    await sendPrompt(question);
+  });
+
+  document.addEventListener("click", event => {
+    const promptButton = event.target.closest("[data-prompt]");
+
+    if (promptButton) {
+      showPage("tutor");
+      sendPrompt(promptButton.dataset.prompt);
+    }
+  });
+
+  // KNOWLEDGE GALAXY
+
+  const concepts = {
+    "Current Electricity": {
+      symbol: "⚡",
+      description: "The flow of electric charge through a conductor. Start with current, voltage, and resistance before studying circuit laws."
+    },
+    "Ohm's Law": {
+      symbol: "Ω",
+      description: "Ohm's law relates voltage, current, and resistance: V = IR, under constant physical conditions."
+    },
+    "Resistance": {
+      symbol: "⌁",
+      description: "Resistance describes how much a component opposes electric current. Its SI unit is the ohm (Ω)."
+    },
+    "Kirchhoff's Laws": {
+      symbol: "⌘",
+      description: "Kirchhoff's current law describes current at a junction; Kirchhoff's voltage law describes voltage around a closed loop."
+    },
+    "Electrical Power": {
+      symbol: "ϟ",
+      description: "Electrical power is the rate of electrical energy transfer. Useful formulas include P = VI, P = I²R, and P = V²/R."
+    },
+    "Circuit Analysis": {
+      symbol: "∿",
+      description: "Circuit analysis uses electrical laws to calculate current, voltage, and resistance in a circuit."
+    },
+    "Series and Parallel Circuits": {
+      symbol: "⫘",
+      description: "In a series circuit, components share a current path. Parallel branches share the same voltage across their endpoints."
+    }
+  };
+
+  document.querySelectorAll("[data-concept]").forEach(button => {
+    button.addEventListener("click", () => {
+      const concept = button.dataset.concept;
+      const details = concepts[concept];
+
+      document.querySelectorAll("[data-concept]").forEach(node => {
+        node.classList.toggle("selected", node === button);
+      });
+
+      $("conceptSymbol").textContent = details.symbol;
+      $("conceptTitle").textContent = concept;
+      $("conceptDescription").textContent = details.description;
+
+      $("studyConcept").dataset.conceptPrompt =
+        `Explain ${concept} with a simple example`;
+    });
+  });
+
+  $("studyConcept").addEventListener("click", () => {
+    showPage("tutor");
+
+    sendPrompt(
+      $("studyConcept").dataset.conceptPrompt ||
+      "Explain Current Electricity with a simple example"
+    );
+  });
+
+  // SAMPLE DIAGNOSTIC QUIZ
+
+  const quizQuestions = [
+    {
+      question: "What does Ohm's law state?",
+      options: [
+        "V = I × R",
+        "V = I + R",
+        "V = R / I",
+        "V = I − R"
+      ],
+      answer: 0,
+      explanation: "Ohm's law states V = IR under constant physical conditions."
+    },
+    {
+      question: "What is the SI unit of electric current?",
+      options: ["Volt", "Ampere", "Ohm", "Watt"],
+      answer: 1,
+      explanation: "Electric current is measured in amperes (A)."
+    },
+    {
+      question: "What is the SI unit of resistance?",
+      options: ["Joule", "Watt", "Ohm", "Coulomb"],
+      answer: 2,
+      explanation: "Electrical resistance is measured in ohms (Ω)."
+    },
+    {
+      question: "Which formula represents electrical power?",
+      options: ["P = VI", "P = V + I", "P = V / I", "P = V − I"],
+      answer: 0,
+      explanation: "Electrical power can be calculated using P = VI."
+    },
+    {
+      question: "In a series circuit, which quantity is the same through ideal components?",
+      options: ["Voltage across each component", "Current", "Resistance", "Power"],
+      answer: 1,
+      explanation: "The same current flows through components connected in series."
+    }
+  ];
+
+  function renderQuestion() {
+    const index = state.questionIndex;
+    const question = quizQuestions[index];
+
+    $("questionCount").textContent =
+      `QUESTION ${index + 1} OF ${quizQuestions.length}`;
+
+    $("quizProgressBar").style.width =
+      `${((index + 1) / quizQuestions.length) * 100}%`;
+
+    $("questionTitle").textContent = question.question;
+    $("questionHint").textContent = "Choose the most accurate answer.";
+
+    const list = $("answerList");
+    list.replaceChildren();
+
+    question.options.forEach((option, optionIndex) => {
+      const button = document.createElement("button");
+
+      button.className = "answer-option";
+      button.textContent = `${String.fromCharCode(65 + optionIndex)}. ${option}`;
+
+      if (state.answers[index] === optionIndex) {
+        button.classList.add("selected");
+      }
+
+      if (state.quizScore !== null) {
+        if (optionIndex === question.answer) {
+          button.classList.add("correct");
+        } else if (state.answers[index] === optionIndex) {
+          button.classList.add("incorrect");
+        }
+      }
+
+      button.addEventListener("click", () => {
+        if (state.quizScore !== null) return;
+
+        state.answers[index] = optionIndex;
+
+        list.querySelectorAll(".answer-option").forEach(optionButton => {
+          optionButton.classList.remove("selected");
+        });
+
+        button.classList.add("selected");
+        $("nextQuestion").disabled = false;
+      });
+
+      list.appendChild(button);
+    });
+
+    $("prevQuestion").disabled = index === 0;
+    $("nextQuestion").disabled =
+      state.answers[index] === undefined || state.quizScore !== null;
+
+    $("nextQuestion").textContent =
+      index === quizQuestions.length - 1
+        ? "Finish quiz →"
+        : "Check answer →";
+
+    if (state.quizScore !== null) {
+      $("quizResult").classList.remove("hidden");
+      $("quizResult").textContent =
+        `Your score: ${state.quizScore}/${quizQuestions.length}. ${question.explanation}`;
+    } else {
+      $("quizResult").classList.add("hidden");
+    }
+  }
+
+  $("prevQuestion").addEventListener("click", () => {
+    if (state.questionIndex > 0) {
+      state.questionIndex--;
+      renderQuestion();
+    }
+  });
+
+  $("nextQuestion").addEventListener("click", () => {
+    if (state.answers[state.questionIndex] === undefined) return;
+
+    if (state.questionIndex < quizQuestions.length - 1) {
+      state.questionIndex++;
+      renderQuestion();
+      return;
+    }
+
+    state.quizScore = quizQuestions.reduce((score, question, index) => {
+      return score + (state.answers[index] === question.answer ? 1 : 0);
+    }, 0);
+
+    $("diagnosticStat").textContent = state.quizScore;
+
+    renderQuestion();
+
+    $("quizResult").textContent =
+      `Quiz complete! You scored ${state.quizScore}/${quizQuestions.length}. ` +
+      "Review the explanations and try again if you want more practice.";
+  });
+
+  renderQuestion();
+
+  // SYLLABUS DEMO
+
+  function renderSyllabus(summaryOnly = false) {
+    const subject = $("syllabusSubject").value;
+    const term = $("syllabusTerm").value;
+    const user = state.user;
+
+    $("syllabusTitle").textContent = summaryOnly
+      ? `${subject} — quick summary`
+      : `${subject} learning roadmap`;
+
+    $("syllabusMeta").textContent =
+      `${user?.course || "Your course"} · ${term} · Demo study guide`;
+
+    const sections = summaryOnly
+      ? [
+          ["Quick overview", `Review the essential definitions and principles of ${subject}.`],
+          ["Key ideas", "Write down the main concepts and how they relate to each other."],
+          ["Self-check", "Solve a few questions without looking at your notes, then review your mistakes."]
+        ]
+      : [
+          ["01 · Foundations", `Review prerequisites, definitions, and key concepts in ${subject}.`],
+          ["02 · Applications", "Practise worked examples and apply the concepts to problems."],
+          ["03 · Revision and assessment", "Review your notes, test yourself, and revisit mistakes."]
+        ];
+
+    const container = $("syllabusContent");
+    container.replaceChildren();
+
+    sections.forEach(([title, description]) => {
+      const section = document.createElement("div");
+      section.className = "syllabus-unit";
+
+      const heading = document.createElement("b");
+      heading.textContent = title;
+
+      const paragraph = document.createElement("p");
+      paragraph.textContent = description;
+
+      section.append(heading, paragraph);
+      container.appendChild(section);
+    });
+
+    toast("Demo study guide generated.");
+  }
+
+  $("generateSyllabus").addEventListener("click", () => {
+    renderSyllabus(false);
+  });
+
+  $("generateSummary").addEventListener("click", () => {
+    renderSyllabus(true);
+  });
+
+  // CUSTOMER SUPPORT DEMO
+
+  $("supportForm").addEventListener("submit", event => {
+    event.preventDefault();
+
+    const category = $("supportCategory").value;
+    const email = $("supportEmail").value.trim();
+    const message = $("supportMessage").value.trim();
+
+    if (!message) {
+      toast("Please describe the issue.");
+      return;
+    }
+
+    const reference = "MND-" + Math.random().toString(36).slice(2, 8).toUpperCase();
+
+    const result = $("supportResult");
+
+    result.classList.remove("hidden");
+    result.textContent =
+      `Demo request ${reference} prepared. Category: ${category}. ` +
+      (email ? `Contact: ${email}. ` : "") +
+      "It has not been sent to a support team.";
+
+    toast("Support request prepared.");
+  });
+
+  // KEEP SESSION IN THIS TAB WHEN POSSIBLE
+
+  try {
+    const session = JSON.parse(sessionStorage.getItem("mindoraSession") || "null");
+
+    if (session && session.name) {
+      openApp(session);
+    }
+  } catch {}
+
+})();
+</script>
+
+</body>
+</html>
